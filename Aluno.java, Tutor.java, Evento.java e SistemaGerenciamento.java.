@@ -1,0 +1,166 @@
+public class Aluno {
+    private String nome;
+    private int id;
+    private double progresso;
+
+    public Aluno(String nome, int id) {
+        this.nome = nome;
+        this.id = id;
+        this.progresso = 0.0;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public double getProgresso() {
+        return progresso;
+    }
+
+    public void atualizarProgresso(double progresso) {
+        this.progresso = progresso;
+    }
+
+    @Override
+    public String toString() {
+        return "Aluno{" +
+                "nome='" + nome + '\'' +
+                ", id=" + id +
+                ", progresso=" + progresso +
+                '}';
+    }
+}
+public class Tutor {
+    private String nome;
+    private int id;
+
+    public Tutor(String nome, int id) {
+        this.nome = nome;
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Tutor{" +
+                "nome='" + nome + '\'' +
+                ", id=" + id +
+                '}';
+    }
+}
+import java.time.LocalDate;
+
+public class Evento {
+    private String descricao;
+    private LocalDate data;
+    private int participantes;
+
+    public Evento(String descricao, LocalDate data) {
+        this.descricao = descricao;
+        this.data = data;
+        this.participantes = 0;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public int getParticipantes() {
+        return participantes;
+    }
+
+    public void adicionarParticipantes(int qtd) {
+        this.participantes += qtd;
+    }
+
+    @Override
+    public String toString() {
+        return "Evento{" +
+                "descricao='" + descricao + '\'' +
+                ", data=" + data +
+                ", participantes=" + participantes +
+                '}';
+    }
+}
+import java.util.ArrayList;
+import java.util.List;
+
+public class SistemaGerenciamento {
+    private List<Aluno> alunos;
+    private List<Tutor> tutores;
+    private List<Evento> eventos;
+
+    public SistemaGerenciamento() {
+        alunos = new ArrayList<>();
+        tutores = new ArrayList<>();
+        eventos = new ArrayList<>();
+    }
+
+    public void adicionarAluno(Aluno aluno) {
+        alunos.add(aluno);
+    }
+
+    public void adicionarTutor(Tutor tutor) {
+        tutores.add(tutor);
+    }
+
+    public void adicionarEvento(Evento evento) {
+        eventos.add(evento);
+    }
+
+    public void gerarRelatorio() {
+        System.out.println("Relatório de Alunos:");
+        for (Aluno aluno : alunos) {
+            System.out.println(aluno);
+        }
+
+        System.out.println("\nRelatório de Tutores:");
+        for (Tutor tutor : tutores) {
+            System.out.println(tutor);
+        }
+
+        System.out.println("\nRelatório de Eventos:");
+        for (Evento evento : eventos) {
+            System.out.println(evento);
+        }
+    }
+
+    public static void main(String[] args) {
+        SistemaGerenciamento sistema = new SistemaGerenciamento();
+
+        // Adicionar alguns alunos
+        sistema.adicionarAluno(new Aluno("João Silva", 1));
+        sistema.adicionarAluno(new Aluno("Maria Oliveira", 2));
+
+        // Adicionar alguns tutores
+        sistema.adicionarTutor(new Tutor("Carlos Pereira", 1));
+        sistema.adicionarTutor(new Tutor("Ana Costa", 2));
+
+        // Adicionar alguns eventos
+        Evento evento1 = new Evento("Workshop de Matemática", LocalDate.of(2024, 4, 10));
+        evento1.adicionarParticipantes(30);
+        sistema.adicionarEvento(evento1);
+
+        Evento evento2 = new Evento("Palestra sobre Literatura", LocalDate.of(2024, 4, 20));
+        evento2.adicionarParticipantes(25);
+        sistema.adicionarEvento(evento2);
+
+        // Gerar relatórios
+        sistema.gerarRelatorio();
+    }
+}
